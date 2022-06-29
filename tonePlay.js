@@ -6,11 +6,15 @@ $("#playTone").click(function (e) {
     e.preventDefault();
     const synth = new Tone.PolySynth(Tone.FMSynth).toDestination();
     const now = Tone.now()
-
-synth.triggerAttackRelease(["C4","E4","G4","B4"], "2n");
-
-synth.triggerAttackRelease(["D4","F4","A4"], "2n",now+2);
-
+    const sampler = new Tone.Sampler({
+        urls: {
+            C1: "key.wav",
+        },
+        baseUrl: "./instruments/",
+        onload: () => {
+            sampler.triggerAttackRelease(["C1", "E1", "G1", "B1"], 0.5);
+        }
+    }).toDestination();
 });
 
 
