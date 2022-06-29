@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="text-white h-screen font-mono" style="
+background-color: #8EC5FC;
+background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
+    <div class="container flex mx-auto bg-gray-800 min-w-full h-10 mb-5">
+        <h1 class="flex items-end pl-10 p-2">Tonejs</h1>
+      </div>
+
+      <div class="container rounded-lg mx-auto shadow-2xl bg-gradient-to-r from-sky-500 to-blue-500s w-8/12">
+        <p class="text-center p-8">Tone is a free procedural music 
+            generator to create royalty free music for 
+            videos, and other media resources, or for inspiration. 
+        </p>
+        <div class="grid grid-cols-4 gap-10 text-center">
+            <div class="block">
+                <label for="cars">Choose a genre:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="name">Choose a tempo:</label>
+
+        <input class="text-black text-center w-20 mx-auto rounded" type="number" id="name" value="80" name="name" min="20" max="300">
+            </div>
+
+            <div class="">
+                <label for="cars">Choose a key:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="cars">Drum Kit:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="cars">Piano:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="cars">Bass:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="cars">Synth:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="cars">Other:</label>
+
+                <select name="cars" id="cars" class="text-black rounded">
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+            </div>
+
+            <div class="mx-auto">
+                <label for="myRange">Reverb:</label>
+
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+
+            <div class="mx-auto">
+                <label for="trem">Tremolo:</label>
+
+                <input type="range" min="1" max="100" value="50" class="slider" id="trem">
+            </div>
+
+            <div class="mx-auto">
+                <label for="panner">Panner:</label>
+
+                <input type="range" min="1" max="100" value="50" class="slider" id="panner">
+            </div>
+
+            <div class="mx-auto">
+                <label for="delay">Delay:</label>
+
+                <input type="range" min="1" max="100" value="50" class="slider" id="delay">
+            </div>
+
+            <div></div>
+            <div>
+                <button id="playTone" class="outline rounded bg-sky-800 w-full p-1" type="button">Play/Record</button>
+            </div>
+            <div>
+                <button class="outline rounded bg-sky-800 p-1 w-full" type="button">Stop</button>
+            </div>
+            <div></div>
+
+            <div></div>
+            <div>
+                <i class="fa-solid fa-arrow-down"></i>
+            </div>
+            <div>
+                <i class="fa-solid fa-arrow-down"></i>
+            </div>
+            <div></div>
+          </div>
+    </div>
+
+
+    <div class="container rounded-lg mx-auto shadow-2xl bg-gradient-to-r from-sky-500 to-blue-500s h-2/6 w-8/12">
+
+        <div class="grid grid-cols-2 gap-10 text-centers mt-7">
+
+                <div id="audio" class="mt-6"><audio controls>
+                    <source src="" type="audio/ogg">
+
+                  </audio>
+                </div>
+                <div class="mt-6">
+                    <button class="outline rounded bg-sky-800 p-1 w-10/12" type="button">Download</button>
+                </div>
+        </div>
+    </div>
+
+
+
+    <script src="tonePlay.js"></script>
+</body>
+<style>
+    input, label, #audio {
+        display:flex;
+        align-items: center;
+    justify-content: center;
+    
+}
+
+label {
+    padding: 5px;
+}
+
+
+
+</style>
+</html>
