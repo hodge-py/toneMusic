@@ -10,11 +10,15 @@ $("#playTone").click(function (e) {
         urls: {
             C1: "key.wav",
         },
-        baseUrl: "./instruments/",
-        onload: () => {
-            sampler.triggerAttackRelease(["C1", "E1", "G1", "B1"], 0.5);
-        }
+        baseUrl: "./instruments/Keys/",
     }).toDestination();
+
+    Tone.loaded().then(() => {
+    sampler.triggerAttackRelease(["Eb1", "G1", "Bb1"], "1n")
+    })
+
+
+
 });
 
 
