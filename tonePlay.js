@@ -22,7 +22,20 @@ $("#playTone").click(function () {
         baseUrl: "./instruments/Keys/",
     }).toDestination();
 
-    
+    const kick = new Tone.Sampler({
+        urls: {
+            C3: "Kick.wav",
+        },
+        baseUrl: "./instruments/Drums/",
+    }).toDestination();
+
+    const snare = new Tone.Sampler({
+        urls: {
+            C3: "snare.wav",
+        },
+        baseUrl: "./instruments/Drums/",
+    }).toDestination();
+
 
     key = $("#MusicKey option:selected").val();
     if (key == "Cmaj"){
@@ -31,10 +44,16 @@ $("#playTone").click(function () {
     else if (key == "Amin"){
         curKey = aminor
     }
+    else if (key == "Gmaj"){
+        curKey = gmajor
+    }
+    else if (key == "Emin"){
+        curKey = eminor
+    }
 
 
     const synth = new Tone.PolySynth(Tone.MonoSynth).toDestination();
-
+    sampler.volume.value = -12;
 
     Tone.Transport.scheduleRepeat((time) => {
         number = Math.floor(Math.random() * 3)
@@ -53,7 +72,19 @@ $("#playTone").click(function () {
         //synth.triggerAttackRelease(curKey[number]+"4", noteLen[length], time);
     }, "4n", "2m");
 
-    
+    kick.volume.value = -7;
+    snare.volume.value = -17;
+
+
+    Tone.Transport.scheduleRepeat((time) => {
+        Tone.loaded().then(() => {
+            kick.triggerAttackRelease("C3", "2n", time)
+            })
+            Tone.loaded().then(() => {
+            snare.triggerAttackRelease("C3", "2n", time + Tone.Time("2n").toSeconds())
+            })
+
+    }, "1m", "2m"); 
 
 
 
