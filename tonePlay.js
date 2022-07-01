@@ -29,6 +29,14 @@ $("#playTone").click(function () {
         baseUrl: "./instruments/Drums/",
     }).toDestination();
 
+    const hihat = new Tone.Sampler({
+        urls: {
+            D3: "hihat.wav"
+        },
+        baseUrl: "./instruments/Drums/",
+    }).toDestination();
+
+
     const snare = new Tone.Sampler({
         urls: {
             C3: "snare.wav",
@@ -72,9 +80,12 @@ $("#playTone").click(function () {
         //synth.triggerAttackRelease(curKey[number]+"4", noteLen[length], time);
     }, "4n", "2m");
 
-    kick.volume.value = -7;
+    kick.volume.value = -4;
     snare.volume.value = -17;
-
+    hihat.volume.value = -19;
+    Tone.Transport.bpm.value = 90
+    Tone.Transport.swing = .9
+    Tone.Transport.swingSubdivision = '8n'
 
     Tone.Transport.scheduleRepeat((time) => {
         Tone.loaded().then(() => {
@@ -83,6 +94,17 @@ $("#playTone").click(function () {
             Tone.loaded().then(() => {
             snare.triggerAttackRelease("C3", "2n", time + Tone.Time("2n").toSeconds())
             })
+
+            Tone.loaded().then(() => {
+                hihat.triggerAttackRelease("D3", "8n", time)
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("8n").toSeconds())
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("4n").toSeconds())
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("4n").toSeconds() + Tone.Time("8n").toSeconds())
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("2n").toSeconds())
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("2n").toSeconds() + Tone.Time("8n").toSeconds())
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("2n").toSeconds() + Tone.Time("4n").toSeconds())
+                hihat.triggerAttackRelease("D3", "8n", time + Tone.Time("2n").toSeconds() + Tone.Time("4n").toSeconds() + Tone.Time("8n").toSeconds())
+                })
 
     }, "1m", "2m"); 
 
