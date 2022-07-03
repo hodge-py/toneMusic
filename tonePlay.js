@@ -11,10 +11,12 @@ const bminor = ["B", "C#","D", "E", "F#", "G", "A"]
 var curKey
 var chordArray = []
 noteLen = ["2n","4n","8n","16n"]
-kicksam = ["Kick.wav",'Kick1.wav', 'Kick2.wav', 'Kick3.wav', 'Kick4.wav', 'Kick5.wav', 'Kick6.wav', 'Kick7.wav']
-keyssam = ["key.wav", 'key1.wav', 'key2.wav', 'key3.wav', 'key4.wav', 'key5.wav', 'key6.wav', 'key7.wav']
-snaresam = ["snare.wav", 'snare1.wav', 'snare2.wav', 'snare3.wav', 'snare4.wav', 'snare5.wav', 'snare6.wav', 'snare7.wav']
-symbolsam = ["hihat.wav", 'hihat1.wav', 'hihat2.wav', 'hihat3.wav', 'hihat4.wav', 'hihat5.wav', 'hihat6.wav', 'hihat7.wav']
+kicksam = ["Kick.wav",'Kick_(2).wav', 'Kick_(3).wav', 'Kick_(4).wav', 'Kick_(5).wav', 'Kick_(6).wav', 'Kick_(7).wav', 'Kick_(8).wav']
+keyssam = ["keys.wav", 'keys_(2).wav', 'keys_(3).wav', 'keys_(4.wav)', 'keys_(5).wav', 'keys_(6).wav', 'keys_(7).wav', 'keys_(8).wav']
+snaresam = ["snare.wav",'snare_(2).wav', 'snare_(3).wav', 'snare_(4).wav', 'snare_(5).wav', 'snare_(6).wav', 'snare_(7).wav', 'snare_(8).wav']
+symbolsam = ["hihat.wav", 'hihat_(2).wav', 'hihat_(3).wav', 'hihat_(4).wav', 'hihat_(5).wav', 'hihat_(6).wav', 'hihat_(7).wav', 'hihat_(8).wav']
+othersam = ["other.wav", 'other_(2).wav', 'other_(3).wav', 'other_(4).wav', 'other_(5).wav', 'other_(6).wav', 'other_(7).wav', 'other_(8).wav']
+basssam = ["bass.wav", 'bass_(2).wav', 'bass_(3).wav', 'bass_(4).wav', 'bass_(5).wav', 'bass_(6).wav', 'bass_(7).wav', 'bass_(8).wav']
 
 
 $("#playTone").click(function () { 
@@ -23,21 +25,21 @@ $("#playTone").click(function () {
     const now = Tone.now()
     const sampler = new Tone.Sampler({
         urls: {
-            C3: "key.wav",
+            C3: keyssam[Math.floor(Math.random() * 8)],
         },
         baseUrl: "./instruments/Keys/",
     }).toDestination();
 
     const kick = new Tone.Sampler({
         urls: {
-            C3: "Kick.wav",
+            C3: kicksam[Math.floor(Math.random() * 8)],
         },
         baseUrl: "./instruments/Drums/",
     }).toDestination();
 
     const hihat = new Tone.Sampler({
         urls: {
-            D3: "hihat.wav"
+            D3: symbolsam[0]
         },
         baseUrl: "./instruments/Drums/",
     }).toDestination();
@@ -45,16 +47,23 @@ $("#playTone").click(function () {
 
     const snare = new Tone.Sampler({
         urls: {
-            C3: "snare.wav",
+            C3: snaresam[Math.floor(Math.random() * 8)],
         },
         baseUrl: "./instruments/Drums/",
     }).toDestination();
 
     const other = new Tone.Sampler({
         urls: {
-            C4: "other.wav",
+            C4: othersam[Math.floor(Math.random() * 8)],
         },
         baseUrl: "./instruments/Other/",
+    }).toDestination();
+
+    const bass = new Tone.Sampler({
+        urls: {
+            C4: basssam[Math.floor(Math.random() * 8)],
+        },
+        baseUrl: "./instruments/Bass/",
     }).toDestination();
 
 
@@ -77,7 +86,7 @@ $("#playTone").click(function () {
 
     sampler.volume.value = -12;
     other.volume.value = -15;
-    
+    bass.volume.value = -7;
 
 
     const first = Tone.Transport.scheduleRepeat((time) => {
@@ -85,7 +94,8 @@ $("#playTone").click(function () {
         createChords(number,curKey)
         Tone.loaded().then(() => {
         sampler.triggerAttackRelease(chordArray, "1n", time);
-        other.triggerAttackRelease(chordArray, "1n", time)
+        other.triggerAttackRelease(chordArray, "1n", time);
+        bass.triggerAttackRelease(chordArray[0], "1n", time)
         })
         //synth.triggerAttackRelease(chordArray, "2n", time);
     }, "1m");
@@ -104,7 +114,7 @@ $("#playTone").click(function () {
 
     console.log(second);
 
-    kick.volume.value = -4;
+    kick.volume.value = -7;
     snare.volume.value = -17;
     hihat.volume.value = -19;
     Tone.Transport.bpm.value = $("#tempo").val()
@@ -138,7 +148,10 @@ $("#playTone").click(function () {
 
 
 
-
+    $(document).on('input', '#volume', function() {
+        console.log($(this).val());
+        Tone.getDestination().volume.rampTo($(this).val(), 0)
+    });
 
 
 
