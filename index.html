@@ -44,19 +44,22 @@ background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
             <div class="mx-auto">
                 <label for="myRange">Reverb:</label>
 
-                <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
+                <input type="range" min="1" max="99" value="0" class="slider" id="myRange">
+                <p id="revout">1</p>
             </div>
 
             <div class="mx-auto">
                 <label for="trem">Tremolo:</label>
 
                 <input type="range" min="1" max="99" value="0" class="slider" id="trem">
+                <p id="tremout">1</p>
             </div>
 
             <div class="mx-auto">
                 <label for="panner">Chorus:</label>
 
                 <input type="range" min="1" max="99" value="0" class="slider" id="panner">
+                <p id="panout">1</p>
             </div>
 
             <div class="mx-auto">
@@ -77,6 +80,7 @@ background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
                 <label for="delay">Phaser:</label>
 
                 <input type="range" min="1" max="99" value="0" class="slider" id="phaser">
+                <p id="phaseout">1</p>
             </div>
 
 
@@ -103,15 +107,12 @@ background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
 
     <div class="container rounded-lg mx-auto shadow-2xl bg-gradient-to-r from-sky-500 to-blue-500s h-2/6 w-8/12">
 
-        <div class="grid grid-cols-2 gap-10 text-centers mt-7">
+        <div class="grid grid-cols-1 gap-10 text-centers mt-7">
 
-                <div id="audio" class="mt-6"><audio controls>
-                    <source src="" type="audio/ogg">
+                <div id="audio" class="mt-6"><audio preload="auto" id="control" controls>
+                    <source id="finishAud" src="" type="audio/webm;codecs=opus">
 
                   </audio>
-                </div>
-                <div class="mt-6">
-                    <button class="outline rounded bg-sky-800 p-1 w-10/12" type="button">Download</button>
                 </div>
         </div>
     </div>

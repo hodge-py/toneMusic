@@ -1,5 +1,10 @@
 $(document).ready(function () {
 const Tone = window.Tone
+const recorder = new Tone.Recorder();
+
+console.log(Tone.Destination);
+Tone.getDestination().connect(recorder)
+
 console.log(Tone);
 const aminor = ["A","B","C","D","E","F","G"]
 const cmajor = ["C","D","E","F","G","A","B"]
@@ -83,7 +88,7 @@ $("#playTone").click(function () {
         curKey = eminor
     }
 
-    delayer(sampler,snare,other)
+    delayer(sampler,snare,other,hihat,kick,bass)
     Tone.getDestination().volume.rampTo($("#volume").val(), 0);
 
     sampler.volume.value = -12;
@@ -100,7 +105,7 @@ $("#playTone").click(function () {
         bass.triggerAttackRelease(chordArray[0], "1n", time)
         })
         //synth.triggerAttackRelease(chordArray, "2n", time);
-    }, "1m");
+    }, "2n");
 
     console.log(first);
     
@@ -144,20 +149,25 @@ $("#playTone").click(function () {
 
     }, "1m", "2m"); 
 
+    recorder.start()
+    console.log(recorder);
     console.log(third);
-
     Tone.Transport.start();
-
+   
 
 
 
     function createChords(number, key) {
+        var chance = Math.random()
         switch(number) {
             case 0:
-              chordArray = [key[0]+"3",key[2]+"3",key[4]+"3"];
-              if (chordArray != undefined){
-                test = "happy"
-                console.log(test)
+              if (chance < .5){
+                console.log("swee");
+                chordArray = [key[0]+"3",key[2]+"3",key[4]+"3"];
+              }
+              else {
+                console.log("cooool");
+                chordArray = [key[0]+"3",key[2]+"3",key[4]+"3",key[6]+"3"];
               }
               break;
             case 1:
@@ -186,8 +196,11 @@ $("#playTone").click(function () {
 
 
 
-$("#stopTone").click(function () { 
+$("#stopTone").click(async function () { 
     Tone.Transport.stop();
+    var recording = await recorder.stop()
+    console.log(recording);
+    handleStop(recording)
     Tone.Transport.clear(first);
     Tone.Transport.clear(second);
     Tone.Transport.clear(third);
@@ -209,17 +222,39 @@ $(document).on('input', '#delay', function() {
     pingPong.wet.value = ($(this).val())/100
 });
 
+$(document).on('input', '#myRange', function() {
+    $("#revout").html($(this).val());
+});
+$(document).on('input', '#trem', function() {
+    $("#tremout").html($(this).val());
+});
+$(document).on('input', '#panner', function() {
+    $("#panout").html($(this).val());
+});
+$(document).on('input', '#phaser', function() {
+    $("#phaseout").html($(this).val());
+});
 
-function delayer(sampler,snare,guitar) {
+
+function delayer(sampler,snare,guitar,hi,kick,bass) {
     pingPong = new Tone.PingPongDelay("4n", 0.2);
     pingPong.wet.value = ($("#delay").val())/100
     sampler.chain(pingPong, Tone.Destination)
     snare.chain(pingPong, Tone.Destination)
     guitar.chain(pingPong, Tone.Destination)
+    hi.chain(pingPong, Tone.Destination)
+    kick.chain(pingPong, Tone.Destination)
+    bass.chain(pingPong, Tone.Destination)
 }
 
 
 
+  async function handleStop(chunks) {
+    ended = URL.createObjectURL(chunks)
+    document.getElementById('finishAud').src = ended
+    console.log(document.getElementById('finishAud'))
+    document.getElementById('control').load()
+  }
 
 
 
