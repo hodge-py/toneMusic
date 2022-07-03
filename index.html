@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
 <head>
+    <title>AlgoMusic - Random Music Generator</title>
+    <meta name="description" content="Generate random royalty free music with a click of a button and export to audio.">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -12,30 +14,20 @@
 background-color: #8EC5FC;
 background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
     <div class="container flex mx-auto bg-gray-800 min-w-full h-10 mb-5">
-        <h1 class="flex items-end pl-10 p-2">Tonejs</h1>
+        <h1 class="flex items-end pl-10 p-2">AlgoMusic</h1>
       </div>
 
       <div class="container rounded-lg mx-auto shadow-2xl bg-gradient-to-r from-sky-500 to-blue-500s w-8/12">
-        <p class="text-center p-8">Tone is a free procedural music 
+        <p class="text-center p-8">AlgoMusic is a free random music 
             generator to create royalty free music for 
             videos, and other media resources, or for inspiration. 
         </p>
         <div class="grid grid-cols-4 gap-10 text-center">
-            <div class="block">
-                <label for="cars">Choose a genre:</label>
-
-                <select name="cars" id="cars" class="text-black rounded">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
 
             <div class="">
                 <label for="name">Choose a tempo:</label>
 
-        <input class="text-black text-center w-20 mx-auto rounded" type="number" id="name" value="120" name="name" min="20" max="300">
+        <input class="text-black text-center w-20 mx-auto rounded" type="number" id="tempo" value="120" name="name" min="20" max="300">
             </div>
 
             <div class="">
@@ -49,87 +41,45 @@ background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
                 </select>
             </div>
 
-            <div class="">
-                <label for="cars">Drum Kit:</label>
-
-                <select name="cars" id="cars" class="text-black rounded">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-
-            <div class="">
-                <label for="cars">Piano:</label>
-
-                <select name="cars" id="cars" class="text-black rounded">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-
-            <div class="">
-                <label for="cars">Bass:</label>
-
-                <select name="cars" id="cars" class="text-black rounded">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-
-            <div class="">
-                <label for="cars">Synth:</label>
-
-                <select name="cars" id="cars" class="text-black rounded">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-
-            <div class="">
-                <label for="cars">Other:</label>
-
-                <select name="cars" id="cars" class="text-black rounded">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-
             <div class="mx-auto">
                 <label for="myRange">Reverb:</label>
 
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
             </div>
 
             <div class="mx-auto">
                 <label for="trem">Tremolo:</label>
 
-                <input type="range" min="1" max="100" value="50" class="slider" id="trem">
+                <input type="range" min="1" max="99" value="0" class="slider" id="trem">
             </div>
 
             <div class="mx-auto">
-                <label for="panner">Panner:</label>
+                <label for="panner">Chorus:</label>
 
-                <input type="range" min="1" max="100" value="50" class="slider" id="panner">
+                <input type="range" min="1" max="99" value="0" class="slider" id="panner">
             </div>
 
             <div class="mx-auto">
                 <label for="delay">Delay:</label>
 
-                <input type="range" min="1" max="100" value="50" class="slider" id="delay">
+                <input type="range" min="1" max="99" value="0" class="slider" id="delay">
             </div>
 
+            <div class="mx-auto">
+                <label for="delay">Volume:</label>
+
+                <input type="range" min="-50" max="10" value="0" class="slider" id="volume">
+            </div>
+
+            <div class="mx-auto">
+                <label for="delay">Phaser:</label>
+
+                <input type="range" min="1" max="99" value="0" class="slider" id="phaser">
+            </div>
+
+
             <div></div>
-            <div>
+            <div id="spinner">
                 <button id="playTone" class="outline rounded bg-sky-800 w-full p-1" type="button">Play/Record</button>
             </div>
             <div>
