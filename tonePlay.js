@@ -8,11 +8,13 @@ const eminor = ["E", "F#", "G", "A","B","C","D"]
 const dmajor = ["D", "E", "F#", "G", "A", "B", "C#"]
 const bminor = ["B", "C#","D", "E", "F#", "G", "A"]
 
+var test
+var pingPong
 var curKey
 var chordArray = []
 noteLen = ["2n","4n","8n","16n"]
 kicksam = ["Kick.wav",'Kick_(2).wav', 'Kick_(3).wav', 'Kick_(4).wav', 'Kick_(5).wav', 'Kick_(6).wav', 'Kick_(7).wav', 'Kick_(8).wav']
-keyssam = ["keys.wav", 'keys_(2).wav', 'keys_(3).wav', 'keys_(4.wav)', 'keys_(5).wav', 'keys_(6).wav', 'keys_(7).wav', 'keys_(8).wav']
+keyssam = ["keys.wav", 'keys_(2).wav', 'keys_(3).wav', 'keys_(4).wav', 'keys_(5).wav', 'keys_(6).wav', 'keys_(7).wav', 'keys_(8).wav']
 snaresam = ["snare.wav",'snare_(2).wav', 'snare_(3).wav', 'snare_(4).wav', 'snare_(5).wav', 'snare_(6).wav', 'snare_(7).wav', 'snare_(8).wav']
 symbolsam = ["hihat.wav", 'hihat_(2).wav', 'hihat_(3).wav', 'hihat_(4).wav', 'hihat_(5).wav', 'hihat_(6).wav', 'hihat_(7).wav', 'hihat_(8).wav']
 othersam = ["other.wav", 'other_(2).wav', 'other_(3).wav', 'other_(4).wav', 'other_(5).wav', 'other_(6).wav', 'other_(7).wav', 'other_(8).wav']
@@ -90,7 +92,7 @@ $("#playTone").click(function () {
 
 
     const first = Tone.Transport.scheduleRepeat((time) => {
-        number = Math.floor(Math.random() * 3)
+        number = Math.floor(Math.random() * 7)
         createChords(number,curKey)
         Tone.loaded().then(() => {
         sampler.triggerAttackRelease(chordArray, "1n", time);
@@ -148,19 +150,15 @@ $("#playTone").click(function () {
 
 
 
-    $(document).on('input', '#volume', function() {
-        console.log($(this).val());
-        Tone.getDestination().volume.rampTo($(this).val(), 0)
-    });
-
-
-
-
 
     function createChords(number, key) {
         switch(number) {
             case 0:
               chordArray = [key[0]+"3",key[2]+"3",key[4]+"3"];
+              if (chordArray != undefined){
+                test = "happy"
+                console.log(test)
+              }
               break;
             case 1:
                 chordArray = [key[1]+"3",key[3]+"3",key[5]+"3"];
@@ -168,12 +166,23 @@ $("#playTone").click(function () {
             case 2:
               chordArray = [key[2]+"3",key[4]+"3",key[6]+"3"];
               break;
+            case 3:
+              chordArray = [key[3]+"3",key[5]+"3",key[0]+"3"];
+              break;
+            case 4:
+              chordArray = [key[4]+"3",key[6]+"3",key[1]+"3"];
+              break;
+            case 5:
+              chordArray = [key[5]+"3",key[0]+"3",key[2]+"3"];
+              break;
+            case 6:
+              chordArray = [key[6]+"3",key[1]+"3",key[3]+"3"];
+              break;
+
+
     }
 
 }
-
-
-
 
 
 
@@ -189,8 +198,20 @@ $("#stopTone").click(function () {
 });
 
 
+
+$(document).on('input', '#volume', function() {
+    $("#volout").html($(this).val());
+    Tone.getDestination().volume.rampTo($(this).val(), 0)
+});
+
+$(document).on('input', '#delay', function() {
+    $("#delayout").html($(this).val());
+    pingPong.wet.value = ($(this).val())/100
+});
+
+
 function delayer(sampler,snare,guitar) {
-    const pingPong = new Tone.PingPongDelay("4n", 0.2);
+    pingPong = new Tone.PingPongDelay("4n", 0.2);
     pingPong.wet.value = ($("#delay").val())/100
     sampler.chain(pingPong, Tone.Destination)
     snare.chain(pingPong, Tone.Destination)
