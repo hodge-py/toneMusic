@@ -13,8 +13,12 @@ const eminor = ["E", "F#", "G", "A","B","C","D"]
 const dmajor = ["D", "E", "F#", "G", "A", "B", "C#"]
 const bminor = ["B", "C#","D", "E", "F#", "G", "A"]
 
+var chooser
 var test
 var pingPong
+var reverb
+var tremo
+var choro
 var curKey
 var chordArray = []
 noteLen = ["2n","4n","8n","16n"]
@@ -89,11 +93,14 @@ $("#playTone").click(function () {
     }
 
     delayer(sampler,snare,other,hihat,kick,bass)
+    reverb2(sampler,snare,other,hihat,kick,bass)
+    trem2(sampler,snare,other,hihat,kick,bass)
+    choro2(sampler,snare,other,hihat,kick,bass)
     Tone.getDestination().volume.rampTo($("#volume").val(), 0);
 
-    sampler.volume.value = -12;
+    sampler.volume.value = -15;
     other.volume.value = -15;
-    bass.volume.value = -7;
+    bass.volume.value = -15;
 
 
     const first = Tone.Transport.scheduleRepeat((time) => {
@@ -117,11 +124,11 @@ $("#playTone").click(function () {
             })
             
         //synth.triggerAttackRelease(curKey[number]+"4", noteLen[length], time);
-    }, "4n", "2m");
+    }, '4n', "2m");
 
     console.log(second);
 
-    kick.volume.value = -7;
+    kick.volume.value = -12;
     snare.volume.value = -17;
     hihat.volume.value = -19;
     Tone.Transport.bpm.value = $("#tempo").val()
@@ -154,7 +161,7 @@ $("#playTone").click(function () {
     console.log(third);
     Tone.Transport.start();
    
-
+    
 
 
     function createChords(number, key) {
@@ -224,12 +231,15 @@ $(document).on('input', '#delay', function() {
 
 $(document).on('input', '#myRange', function() {
     $("#revout").html($(this).val());
+    reverb.wet.value = ($(this).val())/100
 });
 $(document).on('input', '#trem', function() {
     $("#tremout").html($(this).val());
+    tremo.wet.value = ($(this).val())/100
 });
 $(document).on('input', '#panner', function() {
     $("#panout").html($(this).val());
+    choro.wet.value = ($(this).val())/100
 });
 $(document).on('input', '#phaser', function() {
     $("#phaseout").html($(this).val());
@@ -245,6 +255,38 @@ function delayer(sampler,snare,guitar,hi,kick,bass) {
     hi.chain(pingPong, Tone.Destination)
     kick.chain(pingPong, Tone.Destination)
     bass.chain(pingPong, Tone.Destination)
+}
+function reverb2(sampler,snare,guitar,hi,kick,bass) {
+    reverb = new Tone.Reverb(4)
+    reverb.wet.value = ($("#myRange").val())/100
+    sampler.chain(reverb, Tone.Destination)
+    snare.chain(reverb, Tone.Destination)
+    guitar.chain(reverb, Tone.Destination)
+    hi.chain(reverb, Tone.Destination)
+    kick.chain(reverb, Tone.Destination)
+    bass.chain(reverb, Tone.Destination)
+}
+
+function trem2(sampler,snare,guitar,hi,kick,bass) {
+    tremo = new Tone.Tremolo(9, 0.75)
+    tremo.wet.value = ($("#trem").val())/100
+    sampler.chain(tremo, Tone.Destination)
+    snare.chain(tremo, Tone.Destination)
+    guitar.chain(tremo, Tone.Destination)
+    hi.chain(tremo, Tone.Destination)
+    kick.chain(tremo, Tone.Destination)
+    bass.chain(tremo, Tone.Destination)
+}
+
+function choro2(sampler,snare,guitar,hi,kick,bass) {
+    choro = new Tone.Chorus(4, 2.5, 0.5)
+    choro.wet.value = ($("#panner").val())/100
+    sampler.chain(choro, Tone.Destination)
+    snare.chain(choro, Tone.Destination)
+    guitar.chain(choro, Tone.Destination)
+    hi.chain(choro, Tone.Destination)
+    kick.chain(choro, Tone.Destination)
+    bass.chain(choro, Tone.Destination)
 }
 
 

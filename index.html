@@ -1,6 +1,16 @@
 <!doctype html>
 <html>
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MNRYDY53FF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MNRYDY53FF');
+</script>
+
     <title>AlgoMusic - Random Music Generator</title>
     <meta name="description" content="Generate random royalty free music with a click of a button and export to audio.">
   <meta charset="UTF-8">
@@ -10,6 +20,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body class="text-white h-screen font-mono" style="
 background-color: #8EC5FC;
 background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
@@ -44,28 +55,28 @@ background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
             <div class="mx-auto">
                 <label for="myRange">Reverb:</label>
 
-                <input type="range" min="1" max="99" value="0" class="slider" id="myRange">
+                <input type="range" min="1" max="99" value="1" class="slider" id="myRange">
                 <p id="revout">1</p>
             </div>
 
             <div class="mx-auto">
                 <label for="trem">Tremolo:</label>
 
-                <input type="range" min="1" max="99" value="0" class="slider" id="trem">
+                <input type="range" min="1" max="99" value="1" class="slider" id="trem">
                 <p id="tremout">1</p>
             </div>
 
             <div class="mx-auto">
                 <label for="panner">Chorus:</label>
 
-                <input type="range" min="1" max="99" value="0" class="slider" id="panner">
+                <input type="range" min="1" max="99" value="1" class="slider" id="panner">
                 <p id="panout">1</p>
             </div>
 
             <div class="mx-auto">
                 <label for="delay">Delay:</label>
 
-                <input type="range" min="1" max="99" value="0" class="slider" id="delay">
+                <input type="range" min="1" max="99" value="1" class="slider" id="delay">
                 <p id="delayout">1</p>
             </div>
 
@@ -79,7 +90,7 @@ background-image: linear-gradient(320deg, #7ab3ec 0%, #00155cba 100%);">
             <div class="mx-auto">
                 <label for="delay">Phaser:</label>
 
-                <input type="range" min="1" max="99" value="0" class="slider" id="phaser">
+                <input type="range" min="1" max="99" value="1" class="slider" id="phaser">
                 <p id="phaseout">1</p>
             </div>
 
